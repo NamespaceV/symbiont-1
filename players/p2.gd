@@ -24,3 +24,8 @@ func _physics_process(delta: float) -> void:
 			var b = boom_scn.instantiate() as Node2D
 			b.global_position = self.global_position
 			get_tree().root.add_child(b)
+	
+	if G.ammo == 0:
+		$AnimationPlayer.play("no_ammo")
+	else:
+		$AnimationPlayer.play("RESET")
