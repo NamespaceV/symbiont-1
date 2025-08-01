@@ -1,5 +1,5 @@
-extends Node
 # SINGLETON G
+extends Node
 
 var p1 : P1
 var p2 : P2
