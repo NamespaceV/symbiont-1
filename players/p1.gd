@@ -13,3 +13,9 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	var delta_pos = global_position - old_pos
 	G.p2.position += delta_pos
+
+func ammo_pickup_anim():
+	$AnimationPlayer.play("ammo_picekd_up")
+
+func damaged_anim():
+	$AnimationPlayer.play("damaged")

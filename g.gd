@@ -24,19 +24,23 @@ func _physics_process(delta: float) -> void:
 
 func deal_damage(damage:float):
 	hp -= damage
+	p1.damaged_anim()
 	if hp < 0:
-		fill_ammo()
+		fill_ammo(true)
 		heal()
 		get_tree().reload_current_scene()
 
-func fill_ammo():
-	G.ammo = max(G.ammo, 5)
+func fill_ammo(reset = false):
+	ammo = max(ammo, 5)
+	if !reset:
+		p1.ammo_pickup_anim()
+	
 
 func heal():
 	G.hp = 100
 
 func load_level(level_name):
-	fill_ammo()
+	fill_ammo(true)
 	heal()
 	get_tree().change_scene_to_file("res://levels/"+level_name+".tscn")
 

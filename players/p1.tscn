@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://bw6e5hm4ghv1a"]
+
+[ext_resource type="Script" uid="uid://b56tpm27p7e8b" path="res://players/p1.gd" id="1_qyg75"]
+[ext_resource type="PackedScene" uid="uid://bk31o316ntp0a" path="res://players/hud.tscn" id="2_bjp46"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(89, 98)
+
+[sub_resource type="Animation" id="Animation_qyg75"]
+resource_name = "ammo_picekd_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.166667, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.500223, 0.557673, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bjp46"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8c4ii"]
+resource_name = "damaged"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.166667, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.498394, 0, 0.0673565, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8c4ii"]
+_data = {
+&"RESET": SubResource("Animation_bjp46"),
+&"ammo_picekd_up": SubResource("Animation_qyg75"),
+&"damaged": SubResource("Animation_8c4ii")
+}
+
+[node name="P1" type="CharacterBody2D"]
+script = ExtResource("1_qyg75")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 1)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-79, -108)
+polygon = PackedVector2Array(40, 57, 40, 57, 129, 59, 124, 152, 38, 144)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 3)
+
+[node name="HUD" parent="." instance=ExtResource("2_bjp46")]
+offset_left = -956.0
+offset_top = -539.0
+offset_right = -956.0
+offset_bottom = -539.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8c4ii")
+}

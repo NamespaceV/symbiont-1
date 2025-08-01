@@ -2,8 +2,8 @@
 
 [ext_resource type="TileSet" uid="uid://hcii2qsmrlvc" path="res://bg/new_tile_set.tres" id="1_4i1pt"]
 [ext_resource type="PackedScene" uid="uid://c1dvy7an7h2ag" path="res://interactable/ammo/ammo.tscn" id="2_slxhu"]
-[ext_resource type="PackedScene" uid="uid://bw6e5hm4ghv1a" path="res://players/p_1.tscn" id="3_7ogr4"]
-[ext_resource type="PackedScene" uid="uid://xdvelqi1ptk5" path="res://players/p_2.tscn" id="4_ex5l2"]
+[ext_resource type="PackedScene" uid="uid://bw6e5hm4ghv1a" path="res://players/p1.tscn" id="3_7ogr4"]
+[ext_resource type="PackedScene" uid="uid://xdvelqi1ptk5" path="res://players/p2.tscn" id="4_ex5l2"]
 [ext_resource type="PackedScene" uid="uid://dd1rolul00gh4" path="res://interactable/barrel/barrel.tscn" id="4_slxhu"]
 [ext_resource type="PackedScene" uid="uid://dg5111wkeoqqj" path="res://enemy/enemy.tscn" id="5_hgmur"]
 [ext_resource type="PackedScene" uid="uid://ovfieai70e76" path="res://interactable/exit/exit.tscn" id="6_f5y7h"]
