@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dg5111wkeoqqj"]
+
+[ext_resource type="Script" uid="uid://cwltqfnb6st5q" path="res://enemy/enemy.gd" id="1_2mvqj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1bvp3"]
+radius = 36.0139
+
+[node name="Enemy" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_2mvqj")
+
+[node name="Navigation" type="NavigationAgent2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-1, 11)
+polygon = PackedVector2Array(-37, -9, -24, -39, 3, -36, 22, -23, 30, 11, 12, 23, -20, 13)
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D"]
+color = Color(0.290354, 0.0277314, 0.0760889, 1)
+polygon = PackedVector2Array(-16, -22, -8, -22, -8, -16, -23, -16)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Polygon2D"]
+position = Vector2(23, 0)
+color = Color(0.290354, 0.0277314, 0.0760889, 1)
+polygon = PackedVector2Array(-23, -22, -13, -22, -11, -17, -23, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1bvp3")

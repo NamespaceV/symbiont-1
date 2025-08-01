@@ -9,5 +9,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var i = Input.get_vector("p1_l", "p1_r", "p1_u", "p1_d")
 	velocity = i * 500
+	var old_pos = global_position
 	move_and_slide()
-	G.p2.position += velocity * delta
+	var delta_pos = global_position - old_pos
+	G.p2.position += delta_pos
