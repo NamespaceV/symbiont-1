@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bw6e5hm4ghv1a"]
+
+[ext_resource type="Script" uid="uid://b56tpm27p7e8b" path="res://players/p1.gd" id="1_2q5x1"]
+[ext_resource type="PackedScene" uid="uid://bk31o316ntp0a" path="res://players/hud.tscn" id="2_mw361"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(89, 98)
+
+[node name="P1" type="CharacterBody2D"]
+script = ExtResource("1_2q5x1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 1)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-79, -108)
+polygon = PackedVector2Array(40, 57, 40, 57, 129, 59, 124, 152, 38, 144)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 3)
+
+[node name="HUD" parent="." instance=ExtResource("2_mw361")]
+offset_left = -956.0
+offset_top = -539.0
+offset_right = -956.0
+offset_bottom = -539.0

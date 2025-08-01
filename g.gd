@@ -3,3 +3,6 @@ extends Node
 
 var p1 : P1
 var p2 : P2
+
+var ammo = 5
+var hp = 100
