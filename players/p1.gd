@@ -6,7 +6,7 @@ func _ready() -> void:
 	G.p1 = self
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var i = Input.get_vector("p1_l", "p1_r", "p1_u", "p1_d")
 	velocity = i * 500
 	var old_pos = global_position

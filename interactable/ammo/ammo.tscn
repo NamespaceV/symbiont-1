@@ -19,4 +19,11 @@ polygon = PackedVector2Array(-38, -64, -14, -89, 39, -93, 54, -69, 41, -47, -17,
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_h2yge")
 
+[node name="Label" type="Label" parent="."]
+offset_left = -27.0
+offset_top = -9.0
+offset_right = 24.0
+offset_bottom = 14.0
+text = "Ammo"
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
