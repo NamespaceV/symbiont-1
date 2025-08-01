@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=4 uid="uid://uj4yk8p5esju"]
+
+[ext_resource type="Script" uid="uid://b56tpm27p7e8b" path="res://pc.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://8gyjrfmlex2y" path="res://p_2.gd" id="2_0xm2m"]
+[ext_resource type="TileSet" uid="uid://hcii2qsmrlvc" path="res://bg/new_tile_set.tres" id="3_h2yge"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(89, 98)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Level"]
+position = Vector2(-12, -1)
+scale = Vector2(4, 4)
+tile_map_data = PackedByteArray("AAABAAoAAAABAAAAAAACAAoAAAABAAAAAAADAAoAAAABAAAAAAAEAAoAAAABAAAAAAAFAAoAAAABAAAAAAAGAAoAAAABAAAAAAAHAAoAAAABAAAAAAAIAAoAAAABAAAAAAAJAAoAAAABAAAAAAAKAAoAAAABAAAAAAALAAoAAAABAAAAAAAMAAoAAAABAAAAAAANAAoAAAABAAAAAAAOAAoAAAABAAAAAAAPAAoAAAABAAAAAAAPAAkAAAABAAAAAAAPAAgAAAABAAAAAAAPAAcAAAABAAAAAAAPAAYAAAABAAAAAAAPAAUAAAABAAAAAAAPAAQAAAABAAAAAAAUAAQAAAABAAAAAAAUAAUAAAABAAAAAAAUAAYAAAABAAAAAAAUAAcAAAABAAAAAAAUAAgAAAABAAAAAAAUAAkAAAABAAAAAAAVAAkAAAABAAAAAAAWAAkAAAABAAAAAAAXAAkAAAABAAAAAAAYAAkAAAABAAAAAAAZAAkAAAABAAAAAAAaAAkAAAABAAAAAAAAAA8AAAABAAAAAAABAA8AAAABAAAAAAACAA8AAAABAAAAAAADAA8AAAABAAAAAAAEAA8AAAABAAAAAAAFAA8AAAABAAAAAAAFABAAAAABAAAAAAAFABEAAAABAAAAAAAFABIAAAABAAAAAAAFABMAAAABAAAAAAAKAA8AAAABAAAAAAAKABAAAAABAAAAAAAKABEAAAABAAAAAAAKABIAAAABAAAAAAAKABMAAAABAAAAAAAKABQAAAABAAAAAAALAA8AAAABAAAAAAAMAA8AAAABAAAAAAANAA8AAAABAAAAAAAOAA8AAAABAAAAAAAPAA8AAAABAAAAAAAPABAAAAABAAAAAAAPABEAAAABAAAAAAAPABIAAAABAAAAAAAQABIAAAABAAAAAAAQABMAAAABAAAAAAAQABQAAAABAAAAAAA=")
+tile_set = ExtResource("3_h2yge")
+
+[node name="P1" type="CharacterBody2D" parent="."]
+position = Vector2(306, 422)
+script = ExtResource("1_ig7tw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P1"]
+position = Vector2(-2, 1)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Polygon2D" type="Polygon2D" parent="P1"]
+position = Vector2(-79, -108)
+polygon = PackedVector2Array(40, 57, 40, 57, 129, 59, 124, 152, 38, 144)
+
+[node name="Camera2D" type="Camera2D" parent="P1"]
+position = Vector2(0, 3)
+
+[node name="P2" type="Area2D" parent="."]
+position = Vector2(642, 408)
+script = ExtResource("2_0xm2m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P2"]
+position = Vector2(3, 5)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Polygon2D" type="Polygon2D" parent="P2"]
+position = Vector2(-64, -124)
+color = Color(1, 0.04, 0.04, 0.435294)
+polygon = PackedVector2Array(40, 57, 40, 57, 95, 60, 85, 203, 51, 202)
+
+[node name="Polygon2D2" type="Polygon2D" parent="P2"]
+position = Vector2(-67, -132)
+color = Color(1, 0.04, 0.04, 0.435294)
+polygon = PackedVector2Array(-4, 166, -5, 126, 148, 134, 148, 168)
