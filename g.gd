@@ -9,6 +9,10 @@ var hp = 100.0
 
 func deal_damage(damage:float):
 	hp -= damage
+	if hp < 0:
+		fill_ammo()
+		heal()
+		get_tree().reload_current_scene()
 
 func fill_ammo():
 	G.ammo = max(G.ammo, 5)
