@@ -13,6 +13,11 @@ func _physics_process(delta: float) -> void:
 	var goal = nav.get_next_path_position()
 	velocity = (goal - global_position).normalized() * speed
 	move_and_slide()
+	
+	var distSq = (global_position - G.p1.position).length_squared()
+	#print("d",sqrt(distSq))
+	if distSq < 90*90:
+		G.deal_damage(5 * delta)
 
 func kill() -> void:
 	queue_free()
