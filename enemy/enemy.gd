@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	var distSq = (global_position - G.p1.position).length_squared()
-	print("d",sqrt(distSq))
+	#print("d",sqrt(distSq))
 	if distSq < 110 * 110:
 		G.deal_damage(30 * delta)
 
