@@ -7,6 +7,11 @@ var p2 : P2
 var ammo = 5
 var hp = 100.0
 
+func _ready() -> void:
+	Console.pause_enabled = true
+	Console.add_command("l", load_level, ["level_name"])
+
+
 func deal_damage(damage:float):
 	hp -= damage
 	if hp < 0:
