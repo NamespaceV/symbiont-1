@@ -1,3 +1,4 @@
+class_name Enemy
 extends CharacterBody2D
 
 @onready var nav = $"Navigation" as NavigationAgent2D
@@ -12,3 +13,6 @@ func _physics_process(delta: float) -> void:
 	var goal = nav.get_next_path_position()
 	velocity = (goal - global_position).normalized() * speed
 	move_and_slide()
+
+func kill() -> void:
+	queue_free()

@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://glmquv2lohmf"]
+[gd_scene load_steps=5 format=3 uid="uid://glmquv2lohmf"]
+
+[ext_resource type="Script" uid="uid://b484ovf06m5lc" path="res://players/boom.gd" id="1_3ufft"]
 
 [sub_resource type="Animation" id="Animation_5b8rd"]
 resource_name = "boom"
@@ -61,6 +63,7 @@ _data = {
 }
 
 [node name="Boom" type="Node2D"]
+script = ExtResource("1_3ufft")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color(0.57, 0.0855, 0.0855, 1)
