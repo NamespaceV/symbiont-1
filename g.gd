@@ -9,9 +9,14 @@ var hp = 100.0
 
 var bake_timeout = 0.0
 
+var input_debug = false
+
 func _ready() -> void:
 	Console.pause_enabled = true
 	Console.add_command("l", load_level, ["level_name"])
+	Console.add_command("input_debug", toggle_input_debug)
+	Console.add_command("input_remap", input_remap,  ["player", "device_nr"])
+	
 
 
 func _physics_process(delta: float) -> void:
@@ -47,3 +52,19 @@ func queue_navmesh_update():
 			var n = (o as NavigationRegion2D)
 			n.bake_navigation_polygon()
 	)
+
+func toggle_input_debug():
+	input_debug = !input_debug
+
+func _input(event):
+	if !input_debug: return
+	if event is InputEventJoypadButton and event.pressed:
+		var device_id = event.device
+		var device_name = Input.get_joy_name(device_id)
+		print("Input from device id ", device_id, ": ", device_name)
+
+func input_remap(pl, device):
+	for type in ["l","r", "u", "d", "a"]:
+		for event in InputMap.action_get_events("p"+pl+"_"+type):
+			if event.device != -1:
+				event.device = int(device)
