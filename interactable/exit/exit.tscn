@@ -8,9 +8,14 @@ size = Vector2(90, 54)
 [node name="Exit" type="Node2D"]
 script = ExtResource("1_ujyrr")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2(-12, 71)
-color = Color(0.159903, 0.468559, 0.229964, 1)
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2(-10, 74)
+color = Color(0.972011, 0.664489, 0.306455, 1)
+polygon = PackedVector2Array(-50, -88, -29, -98, 46, -100, 66, -79, 61, -52, -29, -47)
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D2"]
+position = Vector2(4, -10)
+color = Color(0.0714, 0.21, 0.10374, 1)
 polygon = PackedVector2Array(-50, -81, -11, -56, 39, -93, 56, -67, 30, -61, -17, -39)
 
 [node name="Area2D" type="Area2D" parent="."]

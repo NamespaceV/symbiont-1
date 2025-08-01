@@ -7,9 +7,12 @@ func _ready() -> void:
 	)
 
 func kill_stuff():
-	var params = PhysicsPointQueryParameters2D.new()
-	params.position = global_position
-	var hit = get_world_2d().direct_space_state.intersect_point(params)
+	var params = PhysicsShapeQueryParameters2D.new()
+	params.transform = Transform2D(0, global_position)
+	var shape = CircleShape2D.new()
+	shape.radius = 30
+	params.shape = shape
+	var hit = get_world_2d().direct_space_state.intersect_shape(params)
 	for h in hit:
 		var e = h["collider"] as Enemy
 		if e:

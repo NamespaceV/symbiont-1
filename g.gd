@@ -9,3 +9,14 @@ var hp = 100.0
 
 func deal_damage(damage:float):
 	hp -= damage
+
+func fill_ammo():
+	G.ammo = max(G.ammo, 5)
+
+func heal():
+	G.hp = 100
+
+func load_level(level_name):
+	fill_ammo()
+	heal()
+	get_tree().change_scene_to_file("res://levels/"+level_name+".tscn")
