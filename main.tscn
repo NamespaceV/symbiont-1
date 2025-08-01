@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=4 uid="uid://uj4yk8p5esju"]
 
-[ext_resource type="Script" uid="uid://b56tpm27p7e8b" path="res://pc.gd" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://8gyjrfmlex2y" path="res://p_2.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://b56tpm27p7e8b" path="res://p1.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://8gyjrfmlex2y" path="res://p2.gd" id="2_0xm2m"]
 [ext_resource type="TileSet" uid="uid://hcii2qsmrlvc" path="res://bg/new_tile_set.tres" id="3_h2yge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]

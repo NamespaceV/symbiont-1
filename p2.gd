@@ -1,5 +1,9 @@
+class_name P2
 extends Area2D
 
+
+func _ready() -> void:
+	G.p2 = self
 
 
 func _physics_process(delta: float) -> void:
