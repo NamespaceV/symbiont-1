@@ -1,21 +1,26 @@
-[gd_scene load_steps=8 format=4 uid="uid://b8drnowh3e0cp"]
+[gd_scene load_steps=9 format=4 uid="uid://b8drnowh3e0cp"]
 
 [ext_resource type="TileSet" uid="uid://hcii2qsmrlvc" path="res://bg/new_tile_set.tres" id="1_4i1pt"]
 [ext_resource type="PackedScene" uid="uid://c1dvy7an7h2ag" path="res://interactable/ammo/ammo.tscn" id="2_slxhu"]
 [ext_resource type="PackedScene" uid="uid://bw6e5hm4ghv1a" path="res://players/p_1.tscn" id="3_7ogr4"]
 [ext_resource type="PackedScene" uid="uid://xdvelqi1ptk5" path="res://players/p_2.tscn" id="4_ex5l2"]
+[ext_resource type="PackedScene" uid="uid://dd1rolul00gh4" path="res://interactable/barrel/barrel.tscn" id="4_slxhu"]
 [ext_resource type="PackedScene" uid="uid://dg5111wkeoqqj" path="res://enemy/enemy.tscn" id="5_hgmur"]
 [ext_resource type="PackedScene" uid="uid://ovfieai70e76" path="res://interactable/exit/exit.tscn" id="6_f5y7h"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_1bvp3"]
-vertices = PackedVector2Array(1897, 1517, 1982.06, 1595.1, -145.813, 1518.73, 69, 1517, 1915.79, -215.797, 1897, 105, -175.141, -207.203, 681, -55, 933, 105, 933, 265, 681, 265, -27, 589, 69, 589, -27, -55, 937, 1229, 1765, 1385, 201, 1385, 677, 1229, 1673, 685, 1673, 393, 1765, 237, 521, 1229, 229, 1229, 201, 457, 229, 617, 1065, 237, 1317, 393, 1065, 397, 1317, 685, 1673, 1037, 1317, 1037, 937, 617, 1317, 713, 677, 617, 521, 617, 549, 397, 105, 457, 105, 77, 549, 77, 1673, 713)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(8, 9, 10, 7), PackedInt32Array(11, 12, 3, 2), PackedInt32Array(11, 2, 6, 13), PackedInt32Array(7, 13, 6), PackedInt32Array(7, 5, 8), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(18, 19, 20, 15), PackedInt32Array(21, 17, 16), PackedInt32Array(22, 21, 16), PackedInt32Array(22, 16, 23, 24), PackedInt32Array(25, 20, 19, 26), PackedInt32Array(27, 25, 26, 28), PackedInt32Array(29, 15, 14, 30), PackedInt32Array(30, 14, 31, 32), PackedInt32Array(33, 17, 21, 34, 35), PackedInt32Array(23, 36, 37, 38, 35), PackedInt32Array(24, 23, 35, 34), PackedInt32Array(33, 35, 27, 31), PackedInt32Array(31, 27, 28, 32), PackedInt32Array(32, 28, 18, 39), PackedInt32Array(39, 18, 15), PackedInt32Array(39, 15, 29)])
+vertices = PackedVector2Array(1897, 1517, 1982.06, 1595.1, -145.813, 1518.73, 69, 1517, 1915.79, -215.797, 1897, 105, -175.141, -207.203, 681, -55, 933, 105, 933, 265, 681, 265, -27, 589, 69, 589, -27, -55, 1673, 685, 1673, 393, 1765, 237, 1765, 1385, 1065, 237, 1317, 393, 1065, 397, 1317, 685, 769, 529, 803.031, 528.383, 802.086, 554.273, 764, 555, 549, 397, 795.711, 397, 793.891, 446.578, 772, 447, 909, 500, 904, 469, 901.367, 397, 871.344, 617, 870.086, 582.75, 912, 582, 937, 617, 879.031, 500.57, 877.891, 469.469, 677, 617, 677, 1229, 521, 1229, 521, 617, 201, 457, 105, 457, 105, 77, 549, 77, 761.734, 617, 1317, 1037, 1673, 1037, 937, 1229, 1317, 713, 229, 617, 201, 1385, 229, 1229, 1673, 713)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(8, 9, 10, 7), PackedInt32Array(11, 12, 3, 2), PackedInt32Array(11, 2, 6, 13), PackedInt32Array(7, 13, 6), PackedInt32Array(7, 5, 8), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(18, 16, 15, 19), PackedInt32Array(20, 18, 19, 21), PackedInt32Array(22, 23, 24, 25), PackedInt32Array(26, 27, 28, 29), PackedInt32Array(30, 31, 32, 20, 21), PackedInt32Array(33, 34, 35, 36), PackedInt32Array(37, 38, 31, 30), PackedInt32Array(39, 40, 41, 42, 26), PackedInt32Array(43, 44, 45, 46, 26), PackedInt32Array(25, 47, 39, 26), PackedInt32Array(26, 29, 22, 25), PackedInt32Array(48, 49, 17, 50), PackedInt32Array(35, 30, 21, 36), PackedInt32Array(50, 36, 21, 51), PackedInt32Array(43, 26, 42, 52), PackedInt32Array(53, 43, 52, 54), PackedInt32Array(17, 53, 54, 41), PackedInt32Array(17, 41, 40), PackedInt32Array(17, 40, 50), PackedInt32Array(51, 48, 50), PackedInt32Array(51, 21, 14, 55), PackedInt32Array(55, 14, 17), PackedInt32Array(55, 17, 49)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-226, -257, 1964, -266, 2034, 1647, -195, 1567)])
 source_geometry_mode = 1
 source_geometry_group_name = &"navmesh"
 agent_radius = 50.0
 
 [node name="Level" type="Node2D"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(29, -28)
+navigation_polygon = SubResource("NavigationPolygon_1bvp3")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." groups=["navmesh"]]
 position = Vector2(-12, -1)
@@ -25,16 +30,24 @@ tile_set = ExtResource("1_4i1pt")
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Ammo" parent="Objects" instance=ExtResource("2_slxhu")]
-position = Vector2(387, 245)
-
 [node name="Exit" parent="Objects" instance=ExtResource("6_f5y7h")]
 position = Vector2(1574, 1234)
 level_name = "win"
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(29, -28)
-navigation_polygon = SubResource("NavigationPolygon_1bvp3")
+[node name="Ammo" parent="Objects" instance=ExtResource("2_slxhu")]
+position = Vector2(387, 245)
+
+[node name="Barrel" parent="Objects" instance=ExtResource("4_slxhu")]
+position = Vector2(877, 397)
+
+[node name="Barrel2" parent="Objects" instance=ExtResource("4_slxhu")]
+position = Vector2(853, 455)
+
+[node name="Barrel3" parent="Objects" instance=ExtResource("4_slxhu")]
+position = Vector2(885, 510)
+
+[node name="Barrel4" parent="Objects" instance=ExtResource("4_slxhu")]
+position = Vector2(845, 563)
 
 [node name="P1" parent="." instance=ExtResource("3_7ogr4")]
 position = Vector2(306, 422)

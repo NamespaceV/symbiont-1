@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://dd1rolul00gh4"]
+
+[ext_resource type="Script" uid="uid://bilyuaj4cfjew" path="res://interactable/barrel/barrel.gd" id="1_gi426"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(90, 54)
+
+[node name="Barrel" type="StaticBody2D"]
+script = ExtResource("1_gi426")
+metadata/hittable = "barrel"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-12, 71)
+color = Color(0.136667, 0.467579, 0.280855, 1)
+polygon = PackedVector2Array(-38, -64, -14, -89, 39, -93, 54, -69, 41, -47, -17, -39)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -27.0
+offset_top = -9.0
+offset_right = 24.0
+offset_bottom = 14.0
+text = "Barrel"
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." groups=["navmesh"]]
+position = Vector2(-1, 9)
+radius = 10.0
+vertices = PackedVector2Array(54, -47, -51, -45, -54, 37, 57, 35)
+affect_navigation_mesh = true
+carve_navigation_mesh = true

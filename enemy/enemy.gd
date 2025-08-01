@@ -19,5 +19,5 @@ func _physics_process(delta: float) -> void:
 	if distSq < 90*90:
 		G.deal_damage(5 * delta)
 
-func kill() -> void:
+func hit() -> void:
 	queue_free()

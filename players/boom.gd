@@ -14,7 +14,14 @@ func kill_stuff():
 	params.shape = shape
 	var hit = get_world_2d().direct_space_state.intersect_shape(params)
 	for h in hit:
-		var e = h["collider"] as Enemy
-		if e:
-			e.kill()
+		var e = h["collider"] as Node
+		if e.has_meta("hittable"):
+			print("hit ", e.name)
+			e.hit()
+		else:
+			print("hit ignored on ", e.name)
+		
+	if hit.is_empty():
+		print("hit nothing")
+		
 	
