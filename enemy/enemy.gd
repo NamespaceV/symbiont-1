@@ -9,6 +9,9 @@ func _physics_process(delta: float) -> void:
 	if (nav.target_position - G.p1.position).length_squared() > 1:
 		nav.set_target_position(G.p1.global_position)
 		#print("new_pos", G.p1.global_position)
+	
+	if not nav.is_target_reachable():
+		return
 
 	var goal = nav.get_next_path_position()
 	velocity = (goal - global_position).normalized() * speed
