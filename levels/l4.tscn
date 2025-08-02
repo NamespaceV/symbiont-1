@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://xdvelqi1ptk5" path="res://players/p2.tscn" id="6_a62lo"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_1bvp3"]
-vertices = PackedVector2Array(1897, 1517, 1982.06, 1595.1, -145.813, 1518.73, -27, 1517, 1915.79, -215.797, 1897, -55, -175.141, -207.203, -27, -55, 1765, 77, 1765, 1385, 912, 582, 909, 500, 790, 1336, 795.93, 1335.89, 794.133, 1385, 105, 1385, 105, 77, 793, 1254, 769, 529, 803.031, 528.383, 802.086, 554.273, 764, 555, 900.922, 1332, 898.445, 1264.19, 909, 1264, 901, 1332, 872, 635, 870.086, 582.75, 906, 1182, 879.031, 500.57, 877.891, 469.469, 904, 469, 901, 387, 796, 389, 902.938, 1385, 793.891, 446.578, 772, 447, 801, 1184, 798.438, 1253.89, 761, 637)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(2, 6, 7, 3), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(12, 15, 16, 17), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25), PackedInt32Array(26, 27, 10, 9, 28), PackedInt32Array(29, 30, 31, 11), PackedInt32Array(8, 11, 31, 32), PackedInt32Array(16, 8, 32, 33), PackedInt32Array(9, 34, 25, 24), PackedInt32Array(33, 35, 36, 16), PackedInt32Array(37, 38, 17, 16, 39), PackedInt32Array(9, 24, 28), PackedInt32Array(26, 28, 37, 39), PackedInt32Array(21, 39, 16), PackedInt32Array(21, 16, 36, 18)])
+vertices = PackedVector2Array(1915.79, -215.797, 1982.06, 1595.1, 1894, 1519, 1894, -53, -175.141, -207.203, -30, -53, -145.813, 1518.73, -30, 1519, 1103.89, 851, 1762, 79, 1762, 1387, 1070.28, 976.438, 1070.28, 725.563, 978.438, 1068.28, 922, 1387, 922, 1322, 927, 1275, 754, 1347, 761.367, 1346.91, 759.18, 1387, 102, 1387, 760, 1237, 102, 79, 635.719, 976.438, 919, 1321.9, 919, 1275.09, 927, 1172, 853, 1101.89, 768, 1167, 727.563, 1068.28, 898, 488.992, 898, 480.289, 922, 480, 930, 490, 890, 610.023, 890, 593.484, 930, 593, 978.438, 633.719, 763, 372, 759.797, 430.648, 739, 430, 764.172, 1237.13, 733.102, 538.063, 731, 538, 922, 377, 725.672, 635.602, 635.719, 725.563, 602.117, 851)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(1, 6, 7), PackedInt32Array(1, 7, 2), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(9, 8, 12), PackedInt32Array(13, 11, 10, 14, 15, 16), PackedInt32Array(17, 18, 19, 20), PackedInt32Array(21, 17, 20, 22, 23), PackedInt32Array(24, 25, 16, 15), PackedInt32Array(13, 16, 26), PackedInt32Array(27, 13, 26, 28), PackedInt32Array(29, 27, 28), PackedInt32Array(30, 31, 32, 33), PackedInt32Array(34, 35, 36, 37), PackedInt32Array(38, 39, 40, 22), PackedInt32Array(29, 28, 41, 21, 23), PackedInt32Array(40, 42, 43, 22), PackedInt32Array(9, 12, 37), PackedInt32Array(9, 37, 36, 33), PackedInt32Array(9, 33, 32, 44), PackedInt32Array(22, 9, 44, 38), PackedInt32Array(22, 43, 45, 46), PackedInt32Array(22, 46, 47), PackedInt32Array(22, 47, 23)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-226, -257, 1964, -266, 2034, 1647, -195, 1567)])
 source_geometry_mode = 1
 source_geometry_group_name = &"navmesh"
@@ -17,15 +17,19 @@ agent_radius = 50.0
 
 [sub_resource type="GDScript" id="GDScript_l1cf7"]
 script/source = "class_name Boss
-extends AnimatableBody2D
+extends Node2D
 
 var enemy_to_spawn_scene = load(\"res://enemy/enemy.tscn\")
 
-var BOSS_HP = 100
+var BOSS_MAX_HP = 100.0
 var HIT_DMG = 4
+var HEAL_AMOUNT = 3
 
-var hp = BOSS_HP
+var hp = BOSS_MAX_HP
 var spawn_idx = 0
+
+const BOSS_PHASE_DELAY = 2.0
+const SPAWN_RATE = 3
 
 func _ready() -> void:
 	G.enemies_alive += 1
@@ -33,12 +37,12 @@ func _ready() -> void:
 
 func boss_ai_async():
 	while true:
-		await get_tree().create_timer(3).timeout
+		await get_tree().create_timer(BOSS_PHASE_DELAY).timeout
 		var spawn_locations = $SpawnPoints.get_children() as Array[Node2D]
 		if G.enemies_alive >= 10:
 			heal()
 		else:
-			for i in 2:
+			for i in SPAWN_RATE:
 				var e = enemy_to_spawn_scene.instantiate()
 				get_parent().add_child(e)
 				e.global_position = spawn_locations[spawn_idx].global_position
@@ -47,13 +51,15 @@ func boss_ai_async():
 				await get_tree().create_timer(0.1).timeout
 
 func heal():
-	hp += 1
-	$HpBar.value = hp / float(BOSS_HP)
+	hp += HEAL_AMOUNT
+	hp = min(hp, BOSS_MAX_HP)
+	$HpBar.value = hp / float(BOSS_MAX_HP)
 
 func hit() -> void:
 	hp -= HIT_DMG
-	$HpBar.value = hp / float(BOSS_HP)
-	if hp == 0:
+	$HpBar.value = hp / float(BOSS_MAX_HP)
+	print(\"bosshp = \",hp, \" / \", BOSS_MAX_HP)
+	if hp <= 0:
 		$\"../Objects/Exit\".show()
 		queue_free()
 
@@ -70,7 +76,7 @@ bg_color = Color(0.65792, 0.136129, 0.185745, 1)
 [node name="Level" type="Node2D"]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(29, -28)
+position = Vector2(32, -30)
 navigation_polygon = SubResource("NavigationPolygon_1bvp3")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." groups=["navmesh"]]
@@ -122,7 +128,7 @@ position = Vector2(885, 510)
 [node name="Barrel4" parent="Objects" instance=ExtResource("4_i2xgd")]
 position = Vector2(845, 563)
 
-[node name="Boss" type="AnimatableBody2D" parent="." groups=["navmesh"]]
+[node name="Boss" type="StaticBody2D" parent="." groups=["navmesh"]]
 position = Vector2(887, 853)
 script = SubResource("GDScript_l1cf7")
 metadata/hittable = "boss"

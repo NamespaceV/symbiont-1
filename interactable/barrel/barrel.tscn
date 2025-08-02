@@ -26,8 +26,8 @@ offset_bottom = 14.0
 text = "Barrel"
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." groups=["navmesh"]]
-position = Vector2(-1, 9)
+position = Vector2(-5, 8)
 radius = 10.0
-vertices = PackedVector2Array(54, -47, -51, -45, -54, 37, 57, 35)
+vertices = PackedVector2Array(82, -58, -77, -63, -83, 47, 82, 45)
 affect_navigation_mesh = true
 carve_navigation_mesh = true
