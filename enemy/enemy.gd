@@ -4,7 +4,11 @@ extends CharacterBody2D
 @onready var nav = $"Navigation" as NavigationAgent2D
 
 @export var speed = 200
-	
+
+func _ready() -> void:
+	G.enemies_alive += 1
+
+
 func _physics_process(delta: float) -> void:
 	if (nav.target_position - G.p1.position).length_squared() > 1:
 		nav.set_target_position(G.p1.global_position)
@@ -24,3 +28,6 @@ func _physics_process(delta: float) -> void:
 
 func hit() -> void:
 	queue_free()
+
+func _exit_tree() -> void:
+	G.enemies_alive -= 1

@@ -1,5 +1,7 @@
 extends Node2D
 
+const BOOM_RADIUS = 100
+
 func _ready() -> void:
 	kill_stuff()
 	get_tree().create_timer(0.3).timeout.connect(func ():
@@ -10,7 +12,7 @@ func kill_stuff():
 	var params = PhysicsShapeQueryParameters2D.new()
 	params.transform = Transform2D(0, global_position)
 	var shape = CircleShape2D.new()
-	shape.radius = 30
+	shape.radius = BOOM_RADIUS
 	params.shape = shape
 	var hit = get_world_2d().direct_space_state.intersect_shape(params)
 	for h in hit:

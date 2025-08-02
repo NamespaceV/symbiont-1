@@ -6,6 +6,7 @@ var p2 : P2
 
 var ammo = 5
 var hp = 100.0
+var enemies_alive = 0
 
 var bake_timeout = 0.0
 

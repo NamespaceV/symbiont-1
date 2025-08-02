@@ -4,4 +4,4 @@ extends Control
 
 
 func _process(_delta: float) -> void:
-	label.text = "HP: %d Ammo: %d" % [G.hp, G.ammo]
+	label.text = "HP: %d \t Ammo: %d \t Enemies: %d" % [G.hp, G.ammo, G.enemies_alive]
