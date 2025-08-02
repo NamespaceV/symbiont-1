@@ -10,6 +10,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _physics_process(_delta: float) -> void:
 	if G.enemies_alive > 0:
 		$EnemiesAlive.show()
+		$EnemiesAlive.text = "ENEMIES\nALIVE: %d"%[G.enemies_alive]
 		$Area2D.process_mode = Node.PROCESS_MODE_DISABLED
 	else:
 		$EnemiesAlive.hide()

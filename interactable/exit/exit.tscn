@@ -25,10 +25,13 @@ position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_h2yge")
 
 [node name="EnemiesAlive" type="Label" parent="."]
-offset_left = -58.0
-offset_top = -52.0
-offset_right = 57.0
-offset_bottom = -29.0
-text = "ENEMIES ALIVE"
+offset_left = -189.0
+offset_top = -157.0
+offset_right = 170.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 50
+text = "ENEMIES
+ALIVE: 5"
+horizontal_alignment = 1
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

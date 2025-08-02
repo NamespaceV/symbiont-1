@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bw6e5hm4ghv1a"]
+[gd_scene load_steps=10 format=3 uid="uid://bw6e5hm4ghv1a"]
 
 [ext_resource type="Script" uid="uid://b56tpm27p7e8b" path="res://players/p1.gd" id="1_qyg75"]
 [ext_resource type="PackedScene" uid="uid://bk31o316ntp0a" path="res://players/hud.tscn" id="2_bjp46"]
@@ -59,7 +59,10 @@ _data = {
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyg75"]
-bg_color = Color(0.211199, 0.715667, 0.194821, 1)
+bg_color = Color(0.955809, 0.320903, 0.664368, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjp46"]
+bg_color = Color(0.255593, 0.701408, 0.3981, 1)
 
 [node name="P1" type="CharacterBody2D"]
 script = ExtResource("1_qyg75")
@@ -87,19 +90,28 @@ libraries = {
 }
 
 [node name="SlowLabel" type="Label" parent="."]
-offset_left = -41.0
-offset_top = -7.0
-offset_right = 57.0
-offset_bottom = 44.0
+offset_left = -40.0
+offset_top = -19.0
+offset_right = 58.0
+offset_bottom = 32.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "SLOW"
 
 [node name="SlowBar" type="ProgressBar" parent="."]
-offset_left = -27.0
-offset_top = -31.0
-offset_right = 35.0
-offset_bottom = -4.0
+offset_left = -28.0
+offset_top = 18.0
+offset_right = 34.0
+offset_bottom = 45.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_qyg75")
+max_value = 1.0
+value = 0.5
+
+[node name="HPBar" type="ProgressBar" parent="."]
+offset_left = -31.0
+offset_top = -46.0
+offset_right = 31.0
+offset_bottom = -19.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_bjp46")
 max_value = 1.0
 value = 0.5

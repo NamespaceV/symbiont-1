@@ -18,6 +18,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	handle_move()
 	handle_slow(delta)
+	$HPBar.value = G.get_hp_pct()
 
 
 ## move stuff

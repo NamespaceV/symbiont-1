@@ -87,3 +87,11 @@ polygon = PackedVector2Array(-4, 166, -5, 126, 148, 134, 148, 168)
 libraries = {
 &"": SubResource("AnimationLibrary_1wxql")
 }
+
+[node name="AmmoLabel" type="Label" parent="."]
+offset_left = 31.0
+offset_top = -61.0
+offset_right = 60.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 50
+text = "5"
