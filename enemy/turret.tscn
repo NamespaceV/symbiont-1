@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://fob85xw3sybg"]
+
+[ext_resource type="Script" uid="uid://cuxvsf4v13025" path="res://enemy/turret.gd" id="1_kbqpm"]
+
+[node name="Turret" type="Polygon2D"]
+polygon = PackedVector2Array(-38, -43, 15, -53, 38, -13, 117, -17, 120, 25, 40, 22, 10, 65, -37, 46, -65, -4)
+script = ExtResource("1_kbqpm")
+
+[node name="BarrelMarker2D" type="Marker2D" parent="."]
+position = Vector2(146, -3)

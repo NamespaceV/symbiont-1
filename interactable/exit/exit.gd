@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var level_name : String = ""
+@export var level_name : String = "win"
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	var p = body as P1

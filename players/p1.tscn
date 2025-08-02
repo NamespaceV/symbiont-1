@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bk31o316ntp0a" path="res://players/hud.tscn" id="2_bjp46"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
-size = Vector2(89, 98)
+size = Vector2(100, 100)
 
 [sub_resource type="Animation" id="Animation_bjp46"]
 length = 0.001
@@ -68,12 +68,11 @@ bg_color = Color(0.255593, 0.701408, 0.3981, 1)
 script = ExtResource("1_qyg75")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, 1)
 shape = SubResource("RectangleShape2D_0xm2m")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2(-79, -108)
-polygon = PackedVector2Array(40, 57, 40, 57, 129, 59, 124, 152, 38, 144)
+polygon = PackedVector2Array(36, 61, 42, 63, 129, 59, 121.056, 142.85, 126, 155, 31, 156)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 3)
@@ -97,6 +96,7 @@ offset_bottom = 32.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "SLOW"
+metadata/_edit_use_anchors_ = true
 
 [node name="SlowBar" type="ProgressBar" parent="."]
 offset_left = -32.0
@@ -107,6 +107,7 @@ scale = Vector2(0.5, 0.5)
 theme_override_styles/fill = SubResource("StyleBoxFlat_qyg75")
 max_value = 1.0
 value = 0.5
+metadata/_edit_use_anchors_ = true
 
 [node name="HPBar" type="ProgressBar" parent="."]
 offset_left = -30.0
@@ -117,3 +118,4 @@ scale = Vector2(0.5, 0.5)
 theme_override_styles/fill = SubResource("StyleBoxFlat_bjp46")
 max_value = 1.0
 value = 0.5
+metadata/_edit_use_anchors_ = true

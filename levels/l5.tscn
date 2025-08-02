@@ -1,0 +1,132 @@
+[gd_scene load_steps=11 format=4 uid="uid://bks6bc7j5ak1a"]
+
+[ext_resource type="TileSet" uid="uid://hcii2qsmrlvc" path="res://bg/new_tile_set.tres" id="1_heuk6"]
+[ext_resource type="PackedScene" uid="uid://ovfieai70e76" path="res://interactable/exit/exit.tscn" id="2_rlxos"]
+[ext_resource type="PackedScene" uid="uid://c1dvy7an7h2ag" path="res://interactable/ammo/ammo.tscn" id="3_dfu2x"]
+[ext_resource type="PackedScene" uid="uid://dd1rolul00gh4" path="res://interactable/barrel/barrel.tscn" id="4_km8p6"]
+[ext_resource type="PackedScene" uid="uid://bw6e5hm4ghv1a" path="res://players/p1.tscn" id="5_bttr4"]
+[ext_resource type="PackedScene" uid="uid://fob85xw3sybg" path="res://enemy/turret.tscn" id="6_rlxos"]
+[ext_resource type="PackedScene" uid="uid://xdvelqi1ptk5" path="res://players/p2.tscn" id="6_xsy4p"]
+[ext_resource type="PackedScene" uid="uid://dg5111wkeoqqj" path="res://enemy/enemy.tscn" id="7_dfu2x"]
+
+[sub_resource type="GDScript" id="GDScript_dfu2x"]
+script/source = "extends Node2D
+
+func _ready() -> void:
+	pass
+"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_1bvp3"]
+vertices = PackedVector2Array(1763, 1416, 103, 1416, 103, 108, 1763, 108)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(32, 14, 1821, 14, 1836, 1497, 25, 1493)])
+source_geometry_mode = 1
+source_geometry_group_name = &"navmesh"
+agent_radius = 50.0
+
+[node name="Level" type="Node2D"]
+script = SubResource("GDScript_dfu2x")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(31, -59)
+navigation_polygon = SubResource("NavigationPolygon_1bvp3")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." groups=["navmesh"]]
+position = Vector2(-12, -1)
+scale = Vector2(4, 4)
+tile_map_data = PackedByteArray("AAACAAoAAAABAAAAAAACAA8AAAABAAAAAAAUAP//AAABAAAAAAATAP//AAABAAAAAAASAP//AAABAAAAAAARAP//AAABAAAAAAAQAP//AAABAAAAAAAPAP//AAABAAAAAAAOAP//AAABAAAAAAANAP//AAABAAAAAAAMAP//AAABAAAAAAALAP//AAABAAAAAAAKAP//AAABAAAAAAAJAP//AAABAAAAAAAIAP//AAABAAAAAAAHAP//AAABAAAAAAACAAQAAAABAAAAAAACAAMAAAABAAAAAAACAAIAAAABAAAAAAACAAEAAAABAAAAAAACAAAAAAABAAAAAAACAP//AAABAAAAAAA6AAQAAAABAAAAAAA6AAUAAAABAAAAAAA6AAYAAAABAAAAAAA6AAcAAAABAAAAAAA6AAgAAAABAAAAAAA6AAkAAAABAAAAAAA6AAoAAAABAAAAAAA6AAsAAAABAAAAAAA6AAwAAAABAAAAAAA6AA0AAAABAAAAAAA6AA4AAAABAAAAAAA6AA8AAAABAAAAAAA6ABAAAAABAAAAAAA6ABEAAAABAAAAAAA6ABIAAAABAAAAAAA6ABMAAAABAAAAAAA6ABQAAAABAAAAAAA6ABUAAAABAAAAAAA6ABYAAAABAAAAAAA6ABcAAAABAAAAAAA6ABgAAAABAAAAAAA6ABkAAAABAAAAAAA6ABoAAAABAAAAAAA6ABsAAAABAAAAAAAFACwAAAABAAAAAAAKACwAAAABAAAAAAAGACwAAAABAAAAAAAHACwAAAABAAAAAAAIACwAAAABAAAAAAAJACwAAAABAAAAAAALACwAAAABAAAAAAAMACwAAAABAAAAAAANACwAAAABAAAAAAAOACwAAAABAAAAAAAPACwAAAABAAAAAAAQACwAAAABAAAAAAARACwAAAABAAAAAAASACwAAAABAAAAAAATACwAAAABAAAAAAAUACwAAAABAAAAAAAVACwAAAABAAAAAAAWACwAAAABAAAAAAAXACwAAAABAAAAAAAYACwAAAABAAAAAAAZACwAAAABAAAAAAAaACwAAAABAAAAAAAbACwAAAABAAAAAAAcACwAAAABAAAAAAAdACwAAAABAAAAAAAeACwAAAABAAAAAAAfACwAAAABAAAAAAAgACwAAAABAAAAAAAhACwAAAABAAAAAAAiACwAAAABAAAAAAAjACwAAAABAAAAAAAkACwAAAABAAAAAAAlACwAAAABAAAAAAAmACwAAAABAAAAAAAnACwAAAABAAAAAAAoACwAAAABAAAAAAApACwAAAABAAAAAAAqACwAAAABAAAAAAArACwAAAABAAAAAAAsACwAAAABAAAAAAAtACwAAAABAAAAAAAuACwAAAABAAAAAAAvACwAAAABAAAAAAAwACwAAAABAAAAAAAxACwAAAABAAAAAAAyACwAAAABAAAAAAAzACwAAAABAAAAAAA0ACwAAAABAAAAAAA1ACwAAAABAAAAAAA2ACwAAAABAAAAAAA3ACwAAAABAAAAAAA4ACwAAAABAAAAAAA5ACwAAAABAAAAAAA6ACwAAAABAAAAAAA6ABwAAAABAAAAAAA6AB0AAAABAAAAAAA6AB4AAAABAAAAAAA6AB8AAAABAAAAAAA6ACAAAAABAAAAAAA6ACEAAAABAAAAAAA6ACIAAAABAAAAAAA6ACMAAAABAAAAAAA6ACQAAAABAAAAAAA6ACUAAAABAAAAAAA6ACYAAAABAAAAAAA6ACcAAAABAAAAAAA6ACgAAAABAAAAAAA6ACkAAAABAAAAAAA6ACoAAAABAAAAAAA6ACsAAAABAAAAAAACAAUAAAABAAAAAAACAAYAAAABAAAAAAACAAcAAAABAAAAAAACAAgAAAABAAAAAAACAAkAAAABAAAAAAACAAsAAAABAAAAAAACAAwAAAABAAAAAAACAA0AAAABAAAAAAACAA4AAAABAAAAAAADAP//AAABAAAAAAAEAP//AAABAAAAAAAFAP//AAABAAAAAAAGAP//AAABAAAAAAAVAP//AAABAAAAAAAWAP//AAABAAAAAAAXAP//AAABAAAAAAAYAP//AAABAAAAAAAZAP//AAABAAAAAAAaAP//AAABAAAAAAAbAP//AAABAAAAAAAcAP//AAABAAAAAAAdAP//AAABAAAAAAAeAP//AAABAAAAAAAfAP//AAABAAAAAAAgAP//AAABAAAAAAAhAP//AAABAAAAAAAiAP//AAABAAAAAAAjAP//AAABAAAAAAAkAP//AAABAAAAAAAlAP//AAABAAAAAAAmAP//AAABAAAAAAAnAP//AAABAAAAAAAoAP//AAABAAAAAAApAP//AAABAAAAAAAqAP//AAABAAAAAAArAP//AAABAAAAAAAsAP//AAABAAAAAAAtAP//AAABAAAAAAAuAP//AAABAAAAAAAvAP//AAABAAAAAAAwAP//AAABAAAAAAAxAP//AAABAAAAAAAyAP//AAABAAAAAAAzAP//AAABAAAAAAA0AP//AAABAAAAAAA1AP//AAABAAAAAAA2AP//AAABAAAAAAA3AP//AAABAAAAAAA4AP//AAABAAAAAAA5AP//AAABAAAAAAA6AP//AAABAAAAAAA6AAAAAAABAAAAAAA6AAEAAAABAAAAAAA6AAIAAAABAAAAAAA6AAMAAAABAAAAAAACABAAAAABAAAAAAACABEAAAABAAAAAAACABIAAAABAAAAAAACABMAAAABAAAAAAACABQAAAABAAAAAAACABUAAAABAAAAAAACABYAAAABAAAAAAACABcAAAABAAAAAAACABgAAAABAAAAAAACABkAAAABAAAAAAACABoAAAABAAAAAAACABsAAAABAAAAAAACABwAAAABAAAAAAACAB0AAAABAAAAAAACAB4AAAABAAAAAAACAB8AAAABAAAAAAACACAAAAABAAAAAAACACEAAAABAAAAAAACACIAAAABAAAAAAACACMAAAABAAAAAAACACQAAAABAAAAAAACACUAAAABAAAAAAACACYAAAABAAAAAAACACcAAAABAAAAAAACACgAAAABAAAAAAACACkAAAABAAAAAAACACoAAAABAAAAAAACACsAAAABAAAAAAACACwAAAABAAAAAAADACwAAAABAAAAAAAEACwAAAABAAAAAAA=")
+tile_set = ExtResource("1_heuk6")
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Exit" parent="Objects" instance=ExtResource("2_rlxos")]
+visible = false
+position = Vector2(878, 794)
+
+[node name="Ammo" parent="Objects" instance=ExtResource("3_dfu2x")]
+position = Vector2(265, 151)
+
+[node name="Ammo3" parent="Objects" instance=ExtResource("3_dfu2x")]
+position = Vector2(224, 1264)
+
+[node name="Ammo4" parent="Objects" instance=ExtResource("3_dfu2x")]
+position = Vector2(1701, 1292)
+
+[node name="Ammo2" parent="Objects" instance=ExtResource("3_dfu2x")]
+position = Vector2(1697, 138)
+
+[node name="P1" parent="." instance=ExtResource("5_bttr4")]
+position = Vector2(306, 422)
+motion_mode = 1
+
+[node name="P2" parent="." instance=ExtResource("6_xsy4p")]
+position = Vector2(642, 408)
+
+[node name="Barrel" parent="." instance=ExtResource("4_km8p6")]
+position = Vector2(830, -110)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Barrel"]
+position = Vector2(30, 247)
+color = Color(0.381703, 0.381703, 0.381703, 1)
+polygon = PackedVector2Array(-42, -217, -26, -183, -47, -164, -23, -98, -39, -61, -24, -18, -5, -25, -18, -57, 2, -103, -28, -161, -6, -181, -25, -220)
+
+[node name="Turret" parent="Barrel" node_paths=PackedStringArray("destroy_chain_parent") instance=ExtResource("6_rlxos")]
+position = Vector2(18, 245)
+bullet_scene = ExtResource("7_dfu2x")
+rotate_bullet = false
+destroy_chain_parent = NodePath("..")
+
+[node name="Barrel2" parent="." instance=ExtResource("4_km8p6")]
+position = Vector2(1968.58, 443.646)
+rotation = 1.61827
+scale = Vector2(1, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Barrel2"]
+position = Vector2(17.9999, 245)
+color = Color(0.381703, 0.381703, 0.381703, 1)
+polygon = PackedVector2Array(-41, -216, -26, -183, -47, -164, -23, -98, -39, -61, -24.4949, -9.84875, -8.79761, -16.6012, -18, -57, 2, -103, -28, -161, -6, -181, -25, -221)
+
+[node name="Turret2" parent="Barrel2" node_paths=PackedStringArray("destroy_chain_parent") instance=ExtResource("6_rlxos")]
+position = Vector2(17.9999, 245)
+bullet_scene = ExtResource("7_dfu2x")
+rotate_bullet = false
+destroy_chain_parent = NodePath("..")
+
+[node name="Barrel3" parent="." instance=ExtResource("4_km8p6")]
+position = Vector2(981.637, 1541.45)
+rotation = -2.96892
+scale = Vector2(1, 1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Barrel3"]
+position = Vector2(18, 245)
+scale = Vector2(1, 1)
+color = Color(0.381703, 0.381703, 0.381703, 1)
+polygon = PackedVector2Array(-41, -216, -26, -183, -47, -164, -23, -98, -39, -61, -14.101, -16.8273, -0.824585, -22.188, -18, -57, 2, -103, -28, -161, -6, -181, -25, -221)
+
+[node name="Turret3" parent="Barrel3" node_paths=PackedStringArray("destroy_chain_parent") instance=ExtResource("6_rlxos")]
+position = Vector2(18, 245)
+scale = Vector2(1, 1)
+bullet_scene = ExtResource("7_dfu2x")
+rotate_bullet = false
+destroy_chain_parent = NodePath("..")
+
+[node name="Barrel4" parent="." instance=ExtResource("4_km8p6")]
+position = Vector2(-71.2703, 1015.16)
+rotation = -1.4411
+
+[node name="Polygon2D2" type="Polygon2D" parent="Barrel4"]
+position = Vector2(18, 245)
+color = Color(0.381703, 0.381703, 0.381703, 1)
+polygon = PackedVector2Array(-41, -216, -26, -183, -47, -164, -23, -98, -39, -61, -9.61426, -11.8561, 4.00952, -15.65, -18, -57, 2, -103, -28, -161, -6, -181, -25, -221)
+
+[node name="Turret4" parent="Barrel4" node_paths=PackedStringArray("destroy_chain_parent") instance=ExtResource("6_rlxos")]
+position = Vector2(18, 245)
+bullet_scene = ExtResource("7_dfu2x")
+rotate_bullet = false
+destroy_chain_parent = NodePath("..")
+
+[node name="Enemy" parent="." instance=ExtResource("7_dfu2x")]
+position = Vector2(1601, 1202)
+
+[node name="Exit" parent="." instance=ExtResource("2_rlxos")]
+position = Vector2(1237, 909)
