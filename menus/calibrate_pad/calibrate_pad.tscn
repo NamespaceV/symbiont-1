@@ -1,0 +1,191 @@
+[gd_scene load_steps=13 format=3 uid="uid://bhb1lt2kr3f6h"]
+
+[ext_resource type="PackedScene" uid="uid://bcqkjqjecwoju" path="res://menus/calibrate_pad/button_tester.tscn" id="1_rlga0"]
+[ext_resource type="Texture2D" uid="uid://lf2wx8hr2d1r" path="res://addons/kenney_input_prompts/Keyboard & Mouse/Default/keyboard_arrow_down.png" id="2_l2dwt"]
+[ext_resource type="Texture2D" uid="uid://utohv841ew5d" path="res://addons/kenney_input_prompts/Keyboard & Mouse/Default/keyboard_arrow_left.png" id="3_5g4wx"]
+[ext_resource type="Texture2D" uid="uid://ds435lxlc8t31" path="res://addons/kenney_input_prompts/Keyboard & Mouse/Default/keyboard_arrow_right.png" id="4_hubf6"]
+[ext_resource type="Texture2D" uid="uid://dtfb45f1ooj6j" path="res://addons/kenney_input_prompts/Keyboard & Mouse/Default/keyboard_arrow_up.png" id="5_7t1ev"]
+[ext_resource type="Texture2D" uid="uid://iygbjad53rqg" path="res://addons/kenney_input_prompts/Keyboard & Mouse/Default/keyboard_w.png" id="6_f3min"]
+[ext_resource type="Texture2D" uid="uid://uxqnarnjm5bv" path="res://addons/kenney_input_prompts/Keyboard & Mouse/Default/keyboard_s.png" id="7_672il"]
+[ext_resource type="Texture2D" uid="uid://c11esew31ccr" path="res://addons/kenney_input_prompts/Keyboard & Mouse/Default/keyboard_d.png" id="8_8bkxk"]
+[ext_resource type="Texture2D" uid="uid://lfwu6t071i4n" path="res://addons/kenney_input_prompts/Keyboard & Mouse/Default/keyboard_enter.png" id="9_n4306"]
+[ext_resource type="Texture2D" uid="uid://b44f42l4kx4xy" path="res://addons/kenney_input_prompts/Keyboard & Mouse/Default/keyboard_space.png" id="10_3eqcr"]
+[ext_resource type="Texture2D" uid="uid://bf6nybwmeonlb" path="res://addons/kenney_input_prompts/Keyboard & Mouse/Default/keyboard_a.png" id="11_b4ndo"]
+
+[sub_resource type="GDScript" id="GDScript_7wrx7"]
+script/source = "extends Node2D
+
+
+func _ready() -> void:
+	$SpinBox1.value_changed.connect(func (v): input_remap(\"1\",v))
+	$SpinBox2.value_changed.connect(func (v): input_remap(\"2\",v))
+
+func input_remap(pl:String, v:int):
+	var s = \"remapping player %s to device id %d\" % [pl, v]
+	$PressLog.text = s + \"\\n\" + $PressLog.text
+
+	G.input_remap(pl,v)
+
+func _on_back_button_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://main.tscn\")
+
+
+func _input(event):
+	if event is InputEventJoypadButton and event.pressed:
+		var device_id = event.device
+		var device_name = Input.get_joy_name(device_id)
+		var s = \"device id [ %d ] button idx %d | device name : %s\" \\
+			% [device_id, event.button_index, device_name]
+		$PressLog.text = s + \"\\n\" + $PressLog.text
+		
+"
+
+[node name="CalibratePad" type="Node2D"]
+script = SubResource("GDScript_7wrx7")
+
+[node name="PressLog" type="RichTextLabel" parent="."]
+offset_left = 382.0
+offset_top = 803.0
+offset_right = 1889.0
+offset_bottom = 1027.0
+theme_override_font_sizes/bold_italics_font_size = 50
+theme_override_font_sizes/italics_font_size = 50
+theme_override_font_sizes/mono_font_size = 50
+theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/bold_font_size = 50
+text = "press button on pad to see device id"
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 43.0
+offset_top = 879.0
+offset_right = 278.0
+offset_bottom = 1024.0
+theme_override_font_sizes/font_size = 100
+text = "back"
+
+[node name="Buttons" type="Node2D" parent="."]
+
+[node name="ButtonTester" parent="Buttons" instance=ExtResource("1_rlga0")]
+position = Vector2(433, 238)
+
+[node name="ButtonTester2" parent="Buttons" instance=ExtResource("1_rlga0")]
+position = Vector2(644, 388)
+rotation = 1.57079
+action_name = "p1_r"
+
+[node name="ButtonTester3" parent="Buttons" instance=ExtResource("1_rlga0")]
+position = Vector2(234, 393)
+rotation = -1.57079
+action_name = "p1_l"
+
+[node name="ButtonTester4" parent="Buttons" instance=ExtResource("1_rlga0")]
+position = Vector2(429, 524)
+rotation = -3.14159
+action_name = "p1_d"
+
+[node name="ButtonTester5" parent="Buttons" instance=ExtResource("1_rlga0")]
+position = Vector2(670, 581)
+rotation = -3.14159
+polygon = PackedVector2Array(0, -90, -73.0003, -64.9997, -109, 13, -89.9998, 49.0004, -41, 72, 35, 64, 67.0002, 41.9997, 92, 9, 59.9998, -56.0003)
+action_name = "p1_a"
+
+[node name="KeyboardArrowDown" type="Sprite2D" parent="Buttons"]
+position = Vector2(1413, 669)
+texture = ExtResource("2_l2dwt")
+
+[node name="KeyboardArrowLeft" type="Sprite2D" parent="Buttons"]
+position = Vector2(1106, 380)
+texture = ExtResource("3_5g4wx")
+
+[node name="KeyboardArrowRight" type="Sprite2D" parent="Buttons"]
+position = Vector2(1777, 383)
+texture = ExtResource("4_hubf6")
+
+[node name="KeyboardArrowUp" type="Sprite2D" parent="Buttons"]
+position = Vector2(1440, 90)
+texture = ExtResource("5_7t1ev")
+
+[node name="KeyboardW" type="Sprite2D" parent="Buttons"]
+position = Vector2(437, 89)
+texture = ExtResource("6_f3min")
+
+[node name="KeyboardS" type="Sprite2D" parent="Buttons"]
+position = Vector2(432, 671)
+texture = ExtResource("7_672il")
+
+[node name="KeyboardD" type="Sprite2D" parent="Buttons"]
+position = Vector2(810, 387)
+texture = ExtResource("8_8bkxk")
+
+[node name="KeyboardEnter" type="Sprite2D" parent="Buttons"]
+position = Vector2(1781, 700)
+scale = Vector2(2.15625, 1.78125)
+texture = ExtResource("9_n4306")
+
+[node name="KeyboardSpace" type="Sprite2D" parent="Buttons"]
+position = Vector2(858, 687.5)
+scale = Vector2(1.78125, 1.57813)
+texture = ExtResource("10_3eqcr")
+
+[node name="KeyboardA" type="Sprite2D" parent="Buttons"]
+position = Vector2(95, 397)
+texture = ExtResource("11_b4ndo")
+
+[node name="Label" type="Label" parent="Buttons"]
+offset_left = 362.0
+offset_top = 320.0
+offset_right = 481.0
+offset_bottom = 457.0
+theme_override_font_sizes/font_size = 100
+text = "P1"
+
+[node name="Label2" type="Label" parent="Buttons"]
+offset_left = 1359.0
+offset_top = 310.0
+offset_right = 1478.0
+offset_bottom = 447.0
+theme_override_font_sizes/font_size = 100
+text = "P2"
+
+[node name="ButtonTester6" parent="Buttons" instance=ExtResource("1_rlga0")]
+position = Vector2(1430, 228)
+action_name = "p2_u"
+
+[node name="ButtonTester7" parent="Buttons" instance=ExtResource("1_rlga0")]
+position = Vector2(1641, 378)
+rotation = 1.57079
+action_name = "p2_r"
+
+[node name="ButtonTester8" parent="Buttons" instance=ExtResource("1_rlga0")]
+position = Vector2(1231, 383)
+rotation = -1.57079
+action_name = "p2_l"
+
+[node name="ButtonTester9" parent="Buttons" instance=ExtResource("1_rlga0")]
+position = Vector2(1426, 514)
+rotation = -3.14159
+action_name = "p2_d"
+
+[node name="ButtonTester10" parent="Buttons" instance=ExtResource("1_rlga0")]
+position = Vector2(1667, 571)
+rotation = -3.14159
+polygon = PackedVector2Array(0, -90, -73.0003, -64.9997, -109, 13, -89.9998, 49.0004, -41, 72, 35, 64, 67.0002, 41.9997, 92, 9, 59.9998, -56.0003)
+action_name = "p2_a"
+
+[node name="SpinBox1" type="SpinBox" parent="."]
+offset_left = 107.0
+offset_top = 584.0
+offset_right = 276.0
+offset_bottom = 666.0
+max_value = 10.0
+rounded = true
+
+[node name="SpinBox2" type="SpinBox" parent="."]
+offset_left = 1108.0
+offset_top = 606.0
+offset_right = 1279.0
+offset_bottom = 683.0
+max_value = 10.0
+rounded = true
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

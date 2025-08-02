@@ -75,7 +75,7 @@ func _input(event):
 		var device_name = Input.get_joy_name(device_id)
 		print("Input from device id ", device_id, ": ", device_name)
 
-func input_remap(pl, device):
+func input_remap(pl:String, device:int):
 	for type in ["l","r", "u", "d", "a"]:
 		for event in InputMap.action_get_events("p"+pl+"_"+type):
 			if event.device != -1:
