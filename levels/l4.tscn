@@ -1,0 +1,193 @@
+[gd_scene load_steps=11 format=4 uid="uid://st7hq78bxy67"]
+
+[ext_resource type="TileSet" uid="uid://hcii2qsmrlvc" path="res://bg/new_tile_set.tres" id="1_v17eu"]
+[ext_resource type="PackedScene" uid="uid://ovfieai70e76" path="res://interactable/exit/exit.tscn" id="2_y15al"]
+[ext_resource type="PackedScene" uid="uid://c1dvy7an7h2ag" path="res://interactable/ammo/ammo.tscn" id="3_n3rwf"]
+[ext_resource type="PackedScene" uid="uid://dd1rolul00gh4" path="res://interactable/barrel/barrel.tscn" id="4_i2xgd"]
+[ext_resource type="PackedScene" uid="uid://bw6e5hm4ghv1a" path="res://players/p1.tscn" id="5_b6s3k"]
+[ext_resource type="PackedScene" uid="uid://xdvelqi1ptk5" path="res://players/p2.tscn" id="6_a62lo"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_1bvp3"]
+vertices = PackedVector2Array(1897, 1517, 1982.06, 1595.1, -145.813, 1518.73, -27, 1517, 1915.79, -215.797, 1897, -55, -175.141, -207.203, -27, -55, 1765, 77, 1765, 1385, 912, 582, 909, 500, 790, 1336, 795.93, 1335.89, 794.133, 1385, 105, 1385, 105, 77, 793, 1254, 769, 529, 803.031, 528.383, 802.086, 554.273, 764, 555, 900.922, 1332, 898.445, 1264.19, 909, 1264, 901, 1332, 872, 635, 870.086, 582.75, 906, 1182, 879.031, 500.57, 877.891, 469.469, 904, 469, 901, 387, 796, 389, 902.938, 1385, 793.891, 446.578, 772, 447, 801, 1184, 798.438, 1253.89, 761, 637)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(2, 6, 7, 3), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(12, 15, 16, 17), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25), PackedInt32Array(26, 27, 10, 9, 28), PackedInt32Array(29, 30, 31, 11), PackedInt32Array(8, 11, 31, 32), PackedInt32Array(16, 8, 32, 33), PackedInt32Array(9, 34, 25, 24), PackedInt32Array(33, 35, 36, 16), PackedInt32Array(37, 38, 17, 16, 39), PackedInt32Array(9, 24, 28), PackedInt32Array(26, 28, 37, 39), PackedInt32Array(21, 39, 16), PackedInt32Array(21, 16, 36, 18)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-226, -257, 1964, -266, 2034, 1647, -195, 1567)])
+source_geometry_mode = 1
+source_geometry_group_name = &"navmesh"
+agent_radius = 50.0
+
+[sub_resource type="GDScript" id="GDScript_l1cf7"]
+script/source = "class_name Boss
+extends AnimatableBody2D
+
+@onready var nav = $\"Navigation\" as NavigationAgent2D
+
+var enemy_to_spawn_scene = load(\"res://enemy/enemy.tscn\")
+
+var BOSS_HP = 100
+var HIT_DMG = 4
+
+var hp = BOSS_HP
+var spawn_idx = 0
+
+func _ready() -> void:
+	G.enemies_alive += 1
+	boss_ai_async()
+
+func boss_ai_async():
+	while true:
+		await get_tree().create_timer(3).timeout
+		var spawn_locations = $SpawnPoints.get_children() as Array[Node2D]
+		if G.enemies_alive >= 10:
+			heal()
+		else:
+			for i in 2:
+				var e = enemy_to_spawn_scene.instantiate()
+				get_parent().add_child(e)
+				e.global_position = spawn_locations[spawn_idx].global_position
+				spawn_idx += 1
+				spawn_idx %= spawn_locations.size()
+				await get_tree().create_timer(0.1).timeout
+
+func heal():
+	hp += 1
+	$HpBar.value = hp / float(BOSS_HP)
+
+func hit() -> void:
+	hp -= HIT_DMG
+	$HpBar.value = hp / float(BOSS_HP)
+	if hp == 0:
+		$\"../Objects/Exit\".show()
+		queue_free()
+
+func _exit_tree() -> void:
+	G.enemies_alive -= 1
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v17eu"]
+radius = 199.123
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1cf7"]
+bg_color = Color(0.65792, 0.136129, 0.185745, 1)
+
+[node name="Level" type="Node2D"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(29, -28)
+navigation_polygon = SubResource("NavigationPolygon_1bvp3")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." groups=["navmesh"]]
+position = Vector2(-12, -1)
+scale = Vector2(4, 4)
+tile_map_data = PackedByteArray("AAACAAoAAAABAAAAAAACAA8AAAABAAAAAAAUAP//AAABAAAAAAATAP//AAABAAAAAAASAP//AAABAAAAAAARAP//AAABAAAAAAAQAP//AAABAAAAAAAPAP//AAABAAAAAAAOAP//AAABAAAAAAANAP//AAABAAAAAAAMAP//AAABAAAAAAALAP//AAABAAAAAAAKAP//AAABAAAAAAAJAP//AAABAAAAAAAIAP//AAABAAAAAAAHAP//AAABAAAAAAACAAQAAAABAAAAAAACAAMAAAABAAAAAAACAAIAAAABAAAAAAACAAEAAAABAAAAAAACAAAAAAABAAAAAAACAP//AAABAAAAAAA6AAQAAAABAAAAAAA6AAUAAAABAAAAAAA6AAYAAAABAAAAAAA6AAcAAAABAAAAAAA6AAgAAAABAAAAAAA6AAkAAAABAAAAAAA6AAoAAAABAAAAAAA6AAsAAAABAAAAAAA6AAwAAAABAAAAAAA6AA0AAAABAAAAAAA6AA4AAAABAAAAAAA6AA8AAAABAAAAAAA6ABAAAAABAAAAAAA6ABEAAAABAAAAAAA6ABIAAAABAAAAAAA6ABMAAAABAAAAAAA6ABQAAAABAAAAAAA6ABUAAAABAAAAAAA6ABYAAAABAAAAAAA6ABcAAAABAAAAAAA6ABgAAAABAAAAAAA6ABkAAAABAAAAAAA6ABoAAAABAAAAAAA6ABsAAAABAAAAAAAFACwAAAABAAAAAAAKACwAAAABAAAAAAAGACwAAAABAAAAAAAHACwAAAABAAAAAAAIACwAAAABAAAAAAAJACwAAAABAAAAAAALACwAAAABAAAAAAAMACwAAAABAAAAAAANACwAAAABAAAAAAAOACwAAAABAAAAAAAPACwAAAABAAAAAAAQACwAAAABAAAAAAARACwAAAABAAAAAAASACwAAAABAAAAAAATACwAAAABAAAAAAAUACwAAAABAAAAAAAVACwAAAABAAAAAAAWACwAAAABAAAAAAAXACwAAAABAAAAAAAYACwAAAABAAAAAAAZACwAAAABAAAAAAAaACwAAAABAAAAAAAbACwAAAABAAAAAAAcACwAAAABAAAAAAAdACwAAAABAAAAAAAeACwAAAABAAAAAAAfACwAAAABAAAAAAAgACwAAAABAAAAAAAhACwAAAABAAAAAAAiACwAAAABAAAAAAAjACwAAAABAAAAAAAkACwAAAABAAAAAAAlACwAAAABAAAAAAAmACwAAAABAAAAAAAnACwAAAABAAAAAAAoACwAAAABAAAAAAApACwAAAABAAAAAAAqACwAAAABAAAAAAArACwAAAABAAAAAAAsACwAAAABAAAAAAAtACwAAAABAAAAAAAuACwAAAABAAAAAAAvACwAAAABAAAAAAAwACwAAAABAAAAAAAxACwAAAABAAAAAAAyACwAAAABAAAAAAAzACwAAAABAAAAAAA0ACwAAAABAAAAAAA1ACwAAAABAAAAAAA2ACwAAAABAAAAAAA3ACwAAAABAAAAAAA4ACwAAAABAAAAAAA5ACwAAAABAAAAAAA6ACwAAAABAAAAAAA6ABwAAAABAAAAAAA6AB0AAAABAAAAAAA6AB4AAAABAAAAAAA6AB8AAAABAAAAAAA6ACAAAAABAAAAAAA6ACEAAAABAAAAAAA6ACIAAAABAAAAAAA6ACMAAAABAAAAAAA6ACQAAAABAAAAAAA6ACUAAAABAAAAAAA6ACYAAAABAAAAAAA6ACcAAAABAAAAAAA6ACgAAAABAAAAAAA6ACkAAAABAAAAAAA6ACoAAAABAAAAAAA6ACsAAAABAAAAAAACAAUAAAABAAAAAAACAAYAAAABAAAAAAACAAcAAAABAAAAAAACAAgAAAABAAAAAAACAAkAAAABAAAAAAACAAsAAAABAAAAAAACAAwAAAABAAAAAAACAA0AAAABAAAAAAACAA4AAAABAAAAAAADAP//AAABAAAAAAAEAP//AAABAAAAAAAFAP//AAABAAAAAAAGAP//AAABAAAAAAAVAP//AAABAAAAAAAWAP//AAABAAAAAAAXAP//AAABAAAAAAAYAP//AAABAAAAAAAZAP//AAABAAAAAAAaAP//AAABAAAAAAAbAP//AAABAAAAAAAcAP//AAABAAAAAAAdAP//AAABAAAAAAAeAP//AAABAAAAAAAfAP//AAABAAAAAAAgAP//AAABAAAAAAAhAP//AAABAAAAAAAiAP//AAABAAAAAAAjAP//AAABAAAAAAAkAP//AAABAAAAAAAlAP//AAABAAAAAAAmAP//AAABAAAAAAAnAP//AAABAAAAAAAoAP//AAABAAAAAAApAP//AAABAAAAAAAqAP//AAABAAAAAAArAP//AAABAAAAAAAsAP//AAABAAAAAAAtAP//AAABAAAAAAAuAP//AAABAAAAAAAvAP//AAABAAAAAAAwAP//AAABAAAAAAAxAP//AAABAAAAAAAyAP//AAABAAAAAAAzAP//AAABAAAAAAA0AP//AAABAAAAAAA1AP//AAABAAAAAAA2AP//AAABAAAAAAA3AP//AAABAAAAAAA4AP//AAABAAAAAAA5AP//AAABAAAAAAA6AP//AAABAAAAAAA6AAAAAAABAAAAAAA6AAEAAAABAAAAAAA6AAIAAAABAAAAAAA6AAMAAAABAAAAAAACABAAAAABAAAAAAACABEAAAABAAAAAAACABIAAAABAAAAAAACABMAAAABAAAAAAACABQAAAABAAAAAAACABUAAAABAAAAAAACABYAAAABAAAAAAACABcAAAABAAAAAAACABgAAAABAAAAAAACABkAAAABAAAAAAACABoAAAABAAAAAAACABsAAAABAAAAAAACABwAAAABAAAAAAACAB0AAAABAAAAAAACAB4AAAABAAAAAAACAB8AAAABAAAAAAACACAAAAABAAAAAAACACEAAAABAAAAAAACACIAAAABAAAAAAACACMAAAABAAAAAAACACQAAAABAAAAAAACACUAAAABAAAAAAACACYAAAABAAAAAAACACcAAAABAAAAAAACACgAAAABAAAAAAACACkAAAABAAAAAAACACoAAAABAAAAAAACACsAAAABAAAAAAACACwAAAABAAAAAAADACwAAAABAAAAAAAEACwAAAABAAAAAAA=")
+tile_set = ExtResource("1_v17eu")
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Exit" parent="Objects" instance=ExtResource("2_y15al")]
+visible = false
+position = Vector2(878, 794)
+level_name = "win"
+
+[node name="Ammo" parent="Objects" instance=ExtResource("3_n3rwf")]
+position = Vector2(265, 151)
+
+[node name="Ammo3" parent="Objects" instance=ExtResource("3_n3rwf")]
+position = Vector2(224, 1264)
+
+[node name="Ammo4" parent="Objects" instance=ExtResource("3_n3rwf")]
+position = Vector2(1701, 1292)
+
+[node name="Ammo5" parent="Objects" instance=ExtResource("3_n3rwf")]
+position = Vector2(1701, 1292)
+
+[node name="Ammo2" parent="Objects" instance=ExtResource("3_n3rwf")]
+position = Vector2(1697, 138)
+
+[node name="Barrel" parent="Objects" instance=ExtResource("4_i2xgd")]
+position = Vector2(877, 397)
+
+[node name="Barrel2" parent="Objects" instance=ExtResource("4_i2xgd")]
+position = Vector2(853, 455)
+
+[node name="Barrel5" parent="Objects" instance=ExtResource("4_i2xgd")]
+position = Vector2(882, 1192)
+
+[node name="Barrel6" parent="Objects" instance=ExtResource("4_i2xgd")]
+position = Vector2(874, 1262)
+
+[node name="Barrel7" parent="Objects" instance=ExtResource("4_i2xgd")]
+position = Vector2(877, 1342)
+
+[node name="Barrel3" parent="Objects" instance=ExtResource("4_i2xgd")]
+position = Vector2(885, 510)
+
+[node name="Barrel4" parent="Objects" instance=ExtResource("4_i2xgd")]
+position = Vector2(845, 563)
+
+[node name="Boss" type="AnimatableBody2D" parent="." groups=["navmesh"]]
+position = Vector2(887, 853)
+script = SubResource("GDScript_l1cf7")
+metadata/hittable = "boss"
+
+[node name="Polygon2D" type="Polygon2D" parent="Boss"]
+position = Vector2(-1, 11)
+scale = Vector2(5, 5)
+polygon = PackedVector2Array(-37, -9, -24, -39, 3, -36, 22, -23, 30, 11, 12, 23, -20, 13)
+
+[node name="Polygon2D" type="Polygon2D" parent="Boss/Polygon2D"]
+color = Color(0.290354, 0.0277314, 0.0760889, 1)
+polygon = PackedVector2Array(-16, -22, -8, -22, -8, -16, -23, -16)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Boss/Polygon2D"]
+position = Vector2(23, 0)
+color = Color(0.290354, 0.0277314, 0.0760889, 1)
+polygon = PackedVector2Array(-23, -22, -13, -22, -11, -17, -23, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boss"]
+position = Vector2(-2, -32)
+shape = SubResource("CircleShape2D_v17eu")
+
+[node name="HpBar" type="ProgressBar" parent="Boss"]
+offset_left = -96.0
+offset_top = 10.0
+offset_right = 96.0
+offset_bottom = 53.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_l1cf7")
+max_value = 1.0
+value = 1.0
+
+[node name="SpawnPoints" type="Node2D" parent="Boss"]
+
+[node name="Marker2D" type="Marker2D" parent="Boss/SpawnPoints"]
+position = Vector2(-242, -92)
+
+[node name="Marker2D2" type="Marker2D" parent="Boss/SpawnPoints"]
+position = Vector2(-258, -37)
+
+[node name="Marker2D3" type="Marker2D" parent="Boss/SpawnPoints"]
+position = Vector2(-246, 35)
+
+[node name="Marker2D4" type="Marker2D" parent="Boss/SpawnPoints"]
+position = Vector2(68, 183)
+
+[node name="Marker2D5" type="Marker2D" parent="Boss/SpawnPoints"]
+position = Vector2(136, 154)
+
+[node name="Marker2D6" type="Marker2D" parent="Boss/SpawnPoints"]
+position = Vector2(198, 96)
+
+[node name="Marker2D7" type="Marker2D" parent="Boss/SpawnPoints"]
+position = Vector2(99, -274)
+
+[node name="Marker2D8" type="Marker2D" parent="Boss/SpawnPoints"]
+position = Vector2(156, -239)
+
+[node name="Marker2D9" type="Marker2D" parent="Boss/SpawnPoints"]
+position = Vector2(207, -196)
+
+[node name="P1" parent="." instance=ExtResource("5_b6s3k")]
+position = Vector2(306, 422)
+motion_mode = 1
+
+[node name="P2" parent="." instance=ExtResource("6_a62lo")]
+position = Vector2(642, 408)

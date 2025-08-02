@@ -32,7 +32,7 @@ tile_set = ExtResource("1_4i1pt")
 
 [node name="Exit" parent="Objects" instance=ExtResource("6_f5y7h")]
 position = Vector2(246, 785)
-level_name = "win"
+level_name = "l4"
 
 [node name="Ammo" parent="Objects" instance=ExtResource("2_slxhu")]
 position = Vector2(387, 245)
