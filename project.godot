@@ -36,6 +36,10 @@ enabled=PackedStringArray("res://addons/console/plugin.cfg")
 
 navmesh=""
 
+[gui]
+
+theme/custom="uid://cimts3sgu3nfn"
+
 [input]
 
 ui_accept={
