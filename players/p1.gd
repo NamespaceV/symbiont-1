@@ -8,7 +8,8 @@ const SLOW_DISTANCE = 280
 var velocity_mod = 1.0
 const MOD_MIN = 0.1
 const MOD_MAX =  1
-const MOD_ACC = 0.3
+const MOD_DECELERATE = 0.3
+const MOD_ACCELERATE = 0.6
 
 var show_slow_indicator = false
 
@@ -37,12 +38,12 @@ func handle_slow(delta:float):
 	var c:Color
 	if distance_sq > SLOW_DISTANCE * SLOW_DISTANCE:
 		show_slow_indicator = true
-		velocity_mod -= delta * MOD_ACC
+		velocity_mod -= delta * MOD_DECELERATE
 		velocity_mod = max(velocity_mod, MOD_MIN)
 		c = Color.RED
 	else:
 		show_slow_indicator = false
-		velocity_mod += delta * MOD_ACC
+		velocity_mod += delta * MOD_ACCELERATE
 		velocity_mod = min(velocity_mod, MOD_MAX)
 		c = Color.GREEN
 	queue_redraw()
