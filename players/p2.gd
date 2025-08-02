@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	$AmmoLabel.text = str(G.ammo)
 
 
-func clamp_to_camera_bounds(position: Vector2) -> Vector2:
+func clamp_to_camera_bounds(pos: Vector2) -> Vector2:
 	var camera = get_viewport().get_camera_2d()
 	var viewport_rect = camera.get_viewport_rect()  # Size of viewport in pixels
 	
@@ -54,7 +54,7 @@ func clamp_to_camera_bounds(position: Vector2) -> Vector2:
 	var bottom_bound = cam_pos.y + half_height
 
 	# Clamp position within bounds
-	position.x = clamp(position.x, left_bound, right_bound)
-	position.y = clamp(position.y, top_bound, bottom_bound)
+	pos.x = clamp(pos.x, left_bound, right_bound)
+	pos.y = clamp(pos.y, top_bound, bottom_bound)
 
-	return position
+	return pos

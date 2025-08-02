@@ -19,8 +19,6 @@ agent_radius = 50.0
 script/source = "class_name Boss
 extends AnimatableBody2D
 
-@onready var nav = $\"Navigation\" as NavigationAgent2D
-
 var enemy_to_spawn_scene = load(\"res://enemy/enemy.tscn\")
 
 var BOSS_HP = 100
